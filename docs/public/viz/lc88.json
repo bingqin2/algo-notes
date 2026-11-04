@@ -1,0 +1,145 @@
+{
+ "title": "88 合并两个有序数组 · 从后往前",
+ "frames": [
+  {
+   "kind": "array",
+   "cells": [
+    1,
+    4,
+    7,
+    0,
+    0,
+    0
+   ],
+   "ptr": {
+    "i": 2,
+    "k": 5
+   },
+   "hl": [],
+   "window": null,
+   "extra": "nums2 = [2, 5, 6]，j = 2",
+   "note": "从后往前放：k 位置是空位或者已经处理过的元素，不会覆盖还没比较的数。"
+  },
+  {
+   "kind": "array",
+   "cells": [
+    1,
+    4,
+    7,
+    0,
+    0,
+    7
+   ],
+   "ptr": {
+    "i": 1,
+    "k": 5
+   },
+   "hl": [
+    5
+   ],
+   "window": null,
+   "extra": "nums2 = [2, 5, 6]，j = 2",
+   "note": "nums1[2] = 7 > nums2[2] = 6，把 7 放到 k = 5。"
+  },
+  {
+   "kind": "array",
+   "cells": [
+    1,
+    4,
+    7,
+    0,
+    6,
+    7
+   ],
+   "ptr": {
+    "i": 1,
+    "k": 4
+   },
+   "hl": [
+    4
+   ],
+   "window": null,
+   "extra": "nums2 = [2, 5, 6]，j = 1",
+   "note": "nums2[2] = 6 更大（或 nums1 已经用完），放到 k = 4。"
+  },
+  {
+   "kind": "array",
+   "cells": [
+    1,
+    4,
+    7,
+    5,
+    6,
+    7
+   ],
+   "ptr": {
+    "i": 1,
+    "k": 3
+   },
+   "hl": [
+    3
+   ],
+   "window": null,
+   "extra": "nums2 = [2, 5, 6]，j = 0",
+   "note": "nums2[1] = 5 更大（或 nums1 已经用完），放到 k = 3。"
+  },
+  {
+   "kind": "array",
+   "cells": [
+    1,
+    4,
+    4,
+    5,
+    6,
+    7
+   ],
+   "ptr": {
+    "i": 0,
+    "k": 2
+   },
+   "hl": [
+    2
+   ],
+   "window": null,
+   "extra": "nums2 = [2, 5, 6]，j = 0",
+   "note": "nums1[1] = 4 > nums2[0] = 2，把 4 放到 k = 2。"
+  },
+  {
+   "kind": "array",
+   "cells": [
+    1,
+    2,
+    4,
+    5,
+    6,
+    7
+   ],
+   "ptr": {
+    "i": 0,
+    "k": 1
+   },
+   "hl": [
+    1
+   ],
+   "window": null,
+   "extra": "nums2 = [2, 5, 6]，j = -1",
+   "note": "nums2[0] = 2 更大（或 nums1 已经用完），放到 k = 1。"
+  },
+  {
+   "kind": "array",
+   "cells": [
+    1,
+    2,
+    4,
+    5,
+    6,
+    7
+   ],
+   "ptr": {},
+   "hl": [],
+   "window": null,
+   "extra": "",
+   "note": "nums2 放完就结束，nums1 前面剩下的已经在正确位置。结果 [1, 2, 4, 5, 6, 7]。"
+  }
+ ]
+}
