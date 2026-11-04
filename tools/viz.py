@@ -17,6 +17,17 @@ class ListNode:
         self.next = next
 
 
+class NNode:
+    """多叉树结点，用来画回溯的递归树。"""
+    def __init__(self, val):
+        self.val, self.children = val, []
+
+    def add(self, val):
+        ch = NNode(val)
+        self.children.append(ch)
+        return ch
+
+
 class TreeNode:
     def __init__(self, val, left=None, right=None):
         self.val, self.left, self.right = val, left, right
@@ -102,6 +113,50 @@ class Trace:
             "hl": [remap[id(n)] for n in hl if n is not None],
             "dim": [remap[id(n)] for n in dim if n is not None],
             "marks": {str(remap[id(n)]): s for n, s in (marks or {}).items()},
+            "extra": extra,
+            "note": note,
+        })
+
+    def ntree(self, root, note: str, hl=(), dim=(), marks=None, ptr=None, extra=""):
+        """多叉树（回溯的递归树）。结点要有 .val 和 .children。叶子从左到右排，父结点放在孩子中间。"""
+        nodes, edges, pos = [], [], {}
+        leaf = [0]
+        def walk(n, d):
+            for ch in n.children:
+                walk(ch, d + 1)
+                edges.append([id(n), id(ch)])
+            if n.children:
+                x = (pos[id(n.children[0])] + pos[id(n.children[-1])]) / 2
+            else:
+                x = leaf[0]
+                leaf[0] += 1
+            pos[id(n)] = x
+            nodes.append({"id": id(n), "val": n.val, "x": x, "d": d})
+        walk(root, 0)
+        remap = {nd["id"]: k for k, nd in enumerate(nodes)}
+        for nd in nodes:
+            nd["id"] = remap[nd["id"]]
+        self.frames.append({
+            "kind": "tree",
+            "wide": True,
+            "nodes": nodes,
+            "edges": [[remap[a], remap[b]] for a, b in edges],
+            "ptr": {k: remap[id(v)] for k, v in (ptr or {}).items() if v is not None},
+            "hl": [remap[id(n)] for n in hl if n is not None],
+            "dim": [remap[id(n)] for n in dim if n is not None],
+            "marks": {str(remap[id(n)]): s for n, s in (marks or {}).items()},
+            "extra": extra,
+            "note": note,
+        })
+
+    def grid(self, cells, note: str, hl=(), tone=None, extra=""):
+        """二维网格。hl: [(r, c)]；tone: 和 cells 同形状的整数，0 不上色，1~4 是四种底色。"""
+        self.frames.append({
+            "kind": "grid",
+            "cells": [list(r) for r in cells],
+            "hl": [list(x) for x in hl],
+            "tone": [list(r) for r in tone] if tone else None,
+            "ptr": {},
             "extra": extra,
             "note": note,
         })

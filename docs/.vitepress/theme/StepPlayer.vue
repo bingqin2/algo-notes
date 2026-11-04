@@ -1,6 +1,6 @@
 <script setup lang="ts">
 // 逐步播放算法执行过程。帧数据由 tools/traces/*.py 生成，放在 docs/public/viz/*.json。
-// 支持三种画面：kind = "list"（链表）、"array"（数组 + 指针 + 窗口）、"tree"（二叉树）。
+// 支持四种画面：kind = "list"（链表）、"array"（数组 + 指针 + 窗口）、"tree"（二叉树 / 递归树）、"grid"（二维网格）。
 import { ref, computed, onMounted, onBeforeUnmount } from 'vue'
 import { withBase } from 'vitepress'
 
@@ -25,6 +25,7 @@ type ArrayFrame = {
 }
 type TreeFrame = {
   kind: 'tree'
+  wide?: boolean
   nodes: { id: number; val: number | string; x: number; d: number }[]
   edges: [number, number][]
   ptr: Record<string, number>
@@ -34,7 +35,16 @@ type TreeFrame = {
   extra?: string
   note: string
 }
-type Frame = ListFrame | ArrayFrame | TreeFrame
+type GridFrame = {
+  kind: 'grid'
+  cells: (number | string)[][]
+  ptr: Record<string, number>
+  hl?: [number, number][]
+  tone?: number[][] | null
+  extra?: string
+  note: string
+}
+type Frame = ListFrame | ArrayFrame | TreeFrame | GridFrame
 
 const title = ref('')
 const frames = ref<Frame[]>([])
@@ -81,13 +91,13 @@ function step(d: number) {
 // 同一位置可能有多个指针，按位置分组后竖着排
 const ptrGroups = computed(() => {
   const g: Record<number, string[]> = {}
-  if (!f.value) return g
+  if (!f.value || f.value.kind === 'grid') return g
   for (const [name, pos] of Object.entries(f.value.ptr)) (g[pos] ??= []).push(name)
   return g
 })
 const count = computed(() => {
   if (!f.value) return 0
-  if (f.value.kind === 'tree') return 0
+  if (f.value.kind === 'tree' || f.value.kind === 'grid') return 0
   return f.value.kind === 'list' ? f.value.vals.length : f.value.cells.length
 })
 const showNull = computed(() => f.value?.kind === 'list' && ptrGroups.value[count.value] !== undefined)
@@ -97,6 +107,8 @@ const treeMaxX = computed(() => (f.value?.kind === 'tree' ? Math.max(0, ...f.val
 const treeMaxD = computed(() => (f.value?.kind === 'tree' ? Math.max(0, ...f.value.nodes.map((n) => n.d)) : 0))
 const tx = (n: { x: number }) => 36 + n.x * TW
 const ty = (n: { d: number }) => 44 + n.d * 72
+// 叶子的标记画在下方，避免压住连向父结点的线
+const isLeaf = (id: number) => !(f.value as TreeFrame).edges.some(([a]) => a === id)
 const treeNode = (id: number) => (f.value as TreeFrame).nodes.find((n) => n.id === id)!
 const treePtr = computed(() => {
   const g: Record<number, string[]> = {}
@@ -104,10 +116,21 @@ const treePtr = computed(() => {
   for (const [name, id] of Object.entries(f.value.ptr)) (g[id] ??= []).push(name)
   return g
 })
-const width = computed(() => (f.value?.kind === 'tree' ? 72 + treeMaxX.value * TW : 24 + (count.value + 1) * W))
+// 网格
+const GS = 44
+const gridRows = computed(() => (f.value?.kind === 'grid' ? f.value.cells.length : 0))
+const gridCols = computed(() => (f.value?.kind === 'grid' ? f.value.cells[0]?.length ?? 0 : 0))
+const gridHl = (r: number, c: number) => (f.value as GridFrame).hl?.some(([a, b]) => a === r && b === c)
+const width = computed(() =>
+  f.value?.kind === 'tree' ? 72 + treeMaxX.value * TW : f.value?.kind === 'grid' ? 40 + gridCols.value * GS : 24 + (count.value + 1) * W,
+)
 const maxPtr = computed(() => Math.max(1, ...Object.values(ptrGroups.value).map((a) => a.length)))
 const height = computed(() =>
-  f.value?.kind === 'tree' ? 96 + treeMaxD.value * 72 + 18 * Math.max(1, ...Object.values(treePtr.value).map((a) => a.length)) : 150 + maxPtr.value * 18,
+  f.value?.kind === 'tree'
+    ? 96 + treeMaxD.value * 72 + 18 * Math.max(1, ...Object.values(treePtr.value).map((a) => a.length))
+    : f.value?.kind === 'grid'
+      ? 40 + gridRows.value * GS
+      : 150 + maxPtr.value * 18,
 )
 
 function x(k: number) {
@@ -157,11 +180,24 @@ function edgePath(a: number, b: number) {
             />
             <g v-for="n in f.nodes" :key="'tn' + n.id" :class="{ 'sp-dim': f.dim?.includes(n.id) }">
               <circle :cx="tx(n)" :cy="ty(n)" r="19" :class="['sp-box', { hl: f.hl?.includes(n.id) }]" />
-              <text :x="tx(n)" :y="ty(n) + 6" class="sp-val">{{ n.val }}</text>
-              <text v-if="f.marks?.[n.id]" :x="tx(n)" :y="ty(n) - 26" class="sp-mark">{{ f.marks[n.id] }}</text>
+              <text :x="tx(n)" :y="ty(n) + (String(n.val).length > 2 ? 4 : 6)" :class="['sp-val', { 'sp-val-sm': String(n.val).length > 2 }]">{{ n.val }}</text>
+              <text v-if="f.marks?.[n.id]" :x="tx(n)" :y="f.wide && isLeaf(n.id) ? ty(n) + 38 : ty(n) - 26" class="sp-mark">{{ f.marks[n.id] }}</text>
             </g>
             <template v-for="(names, id) in treePtr" :key="'tp' + id">
               <text v-for="(nm, r) in names" :key="nm" :x="tx(treeNode(Number(id)))" :y="ty(treeNode(Number(id))) + 36 + r * 16" class="sp-ptr">↑ {{ nm }}</text>
+            </template>
+          </template>
+
+          <!-- 网格 -->
+          <template v-if="f.kind === 'grid'">
+            <template v-for="(row, r) in f.cells" :key="'gr' + r">
+              <text v-if="r === 0" v-for="(_, c) in row" :key="'gc' + c" :x="32 + c * GS + GS / 2" :y="14" class="sp-idx">{{ c }}</text>
+              <text :x="14" :y="24 + r * GS + GS / 2 + 4" class="sp-idx">{{ r }}</text>
+              <g v-for="(v, c) in row" :key="'g' + r + '-' + c">
+                <rect :x="32 + c * GS" :y="24 + r * GS" :width="GS - 4" :height="GS - 4" rx="6"
+                  :class="['sp-box', 'tone-' + (f.tone?.[r]?.[c] ?? 0), { hl: gridHl(r, c) }]" />
+                <text :x="32 + c * GS + (GS - 4) / 2" :y="24 + r * GS + (GS - 4) / 2 + 6" class="sp-val">{{ v }}</text>
+              </g>
             </template>
           </template>
 
@@ -238,6 +274,11 @@ function edgePath(a: number, b: number) {
 .sp-box.hl { fill: var(--vp-c-brand-soft); stroke: var(--vp-c-brand-1); stroke-width: 2.5; }
 .sp-val { text-anchor: middle; font-size: 17px; font-weight: 600; fill: var(--vp-c-text-1); }
 .sp-idx { text-anchor: middle; font-size: 11px; fill: var(--vp-c-text-3); }
+.sp-val-sm { font-size: 12px; }
+.sp-box.tone-1 { fill: var(--vp-c-green-2); fill-opacity: 0.4; }
+.sp-box.tone-2 { fill: var(--vp-c-yellow-2); fill-opacity: 0.4; }
+.sp-box.tone-3 { fill: var(--vp-c-purple-2); fill-opacity: 0.4; }
+.sp-box.tone-4 { fill: var(--vp-c-red-2); fill-opacity: 0.4; }
 .sp-null { text-anchor: middle; font-size: 20px; fill: var(--vp-c-text-3); }
 .sp-edge { fill: none; stroke: var(--vp-c-text-2); stroke-width: 1.8; }
 .sp-arrowhead { fill: var(--vp-c-text-2); }
