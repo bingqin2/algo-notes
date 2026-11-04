@@ -1,0 +1,247 @@
+{
+ "title": "443 压缩字符串 · 读写双指针",
+ "frames": [
+  {
+   "kind": "array",
+   "cells": [
+    "a",
+    "a",
+    "b",
+    "b",
+    "b",
+    "b",
+    "b",
+    "b",
+    "b",
+    "b",
+    "b",
+    "b",
+    "b",
+    "b",
+    "c"
+   ],
+   "ptr": {
+    "read": 0,
+    "write": 0
+   },
+   "hl": [],
+   "window": null,
+   "extra": "",
+   "note": "read 找一段相同字符的结尾，write 往前面写压缩结果。write 永远不会超过 read，所以能原地写。"
+  },
+  {
+   "kind": "array",
+   "cells": [
+    "a",
+    "a",
+    "b",
+    "b",
+    "b",
+    "b",
+    "b",
+    "b",
+    "b",
+    "b",
+    "b",
+    "b",
+    "b",
+    "b",
+    "c"
+   ],
+   "ptr": {
+    "start": 0,
+    "read": 2,
+    "write": 0
+   },
+   "hl": [],
+   "window": [
+    0,
+    1
+   ],
+   "extra": "write = 0",
+   "note": "从 0 开始的一段 'a' 有 2 个，read 停在 2。"
+  },
+  {
+   "kind": "array",
+   "cells": [
+    "a",
+    "2",
+    "b",
+    "b",
+    "b",
+    "b",
+    "b",
+    "b",
+    "b",
+    "b",
+    "b",
+    "b",
+    "b",
+    "b",
+    "c"
+   ],
+   "ptr": {
+    "write": 2
+   },
+   "hl": [
+    0,
+    1
+   ],
+   "window": null,
+   "extra": "write = 2",
+   "note": "写入 'a' 和次数 2（多位数要一位一位写），write 移到 2。"
+  },
+  {
+   "kind": "array",
+   "cells": [
+    "a",
+    "2",
+    "b",
+    "b",
+    "b",
+    "b",
+    "b",
+    "b",
+    "b",
+    "b",
+    "b",
+    "b",
+    "b",
+    "b",
+    "c"
+   ],
+   "ptr": {
+    "start": 2,
+    "read": 14,
+    "write": 2
+   },
+   "hl": [],
+   "window": [
+    2,
+    13
+   ],
+   "extra": "write = 2",
+   "note": "从 2 开始的一段 'b' 有 12 个，read 停在 14。"
+  },
+  {
+   "kind": "array",
+   "cells": [
+    "a",
+    "2",
+    "b",
+    "1",
+    "2",
+    "b",
+    "b",
+    "b",
+    "b",
+    "b",
+    "b",
+    "b",
+    "b",
+    "b",
+    "c"
+   ],
+   "ptr": {
+    "write": 5
+   },
+   "hl": [
+    2,
+    3,
+    4
+   ],
+   "window": null,
+   "extra": "write = 5",
+   "note": "写入 'b' 和次数 12（多位数要一位一位写），write 移到 5。"
+  },
+  {
+   "kind": "array",
+   "cells": [
+    "a",
+    "2",
+    "b",
+    "1",
+    "2",
+    "b",
+    "b",
+    "b",
+    "b",
+    "b",
+    "b",
+    "b",
+    "b",
+    "b",
+    "c"
+   ],
+   "ptr": {
+    "start": 14,
+    "read": 14,
+    "write": 5
+   },
+   "hl": [],
+   "window": [
+    14,
+    14
+   ],
+   "extra": "write = 5",
+   "note": "从 14 开始的一段 'c' 有 1 个（read 到了末尾）。"
+  },
+  {
+   "kind": "array",
+   "cells": [
+    "a",
+    "2",
+    "b",
+    "1",
+    "2",
+    "c",
+    "b",
+    "b",
+    "b",
+    "b",
+    "b",
+    "b",
+    "b",
+    "b",
+    "c"
+   ],
+   "ptr": {
+    "write": 6
+   },
+   "hl": [
+    5
+   ],
+   "window": null,
+   "extra": "write = 6",
+   "note": "写入 'c'（只有 1 个不写次数），write 移到 6。"
+  },
+  {
+   "kind": "array",
+   "cells": [
+    "a",
+    "2",
+    "b",
+    "1",
+    "2",
+    "c",
+    "b",
+    "b",
+    "b",
+    "b",
+    "b",
+    "b",
+    "b",
+    "b",
+    "c"
+   ],
+   "ptr": {},
+   "hl": [],
+   "window": [
+    0,
+    5
+   ],
+   "extra": "返回 6",
+   "note": "返回 write = 6，前 6 个就是压缩结果 a2b12c。O(n) 时间，O(1) 额外空间。"
+  }
+ ]
+}

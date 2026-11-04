@@ -118,6 +118,11 @@ const treePtr = computed(() => {
 })
 // 网格
 const GS = 44
+// 格子里的文字太长时缩小字号
+const valCls = (v: unknown) => {
+  const n = String(v).length
+  return ['sp-val', { 'sp-val-sm': n > 3 && n <= 5, 'sp-val-xs': n > 5 }]
+}
 const gridRows = computed(() => (f.value?.kind === 'grid' ? f.value.cells.length : 0))
 const gridCols = computed(() => (f.value?.kind === 'grid' ? f.value.cells[0]?.length ?? 0 : 0))
 const gridHl = (r: number, c: number) => (f.value as GridFrame).hl?.some(([a, b]) => a === r && b === c)
@@ -196,7 +201,7 @@ function edgePath(a: number, b: number) {
               <g v-for="(v, c) in row" :key="'g' + r + '-' + c">
                 <rect :x="32 + c * GS" :y="24 + r * GS" :width="GS - 4" :height="GS - 4" rx="6"
                   :class="['sp-box', 'tone-' + (f.tone?.[r]?.[c] ?? 0), { hl: gridHl(r, c) }]" />
-                <text :x="32 + c * GS + (GS - 4) / 2" :y="24 + r * GS + (GS - 4) / 2 + 6" class="sp-val">{{ v }}</text>
+                <text :x="32 + c * GS + (GS - 4) / 2" :y="24 + r * GS + (GS - 4) / 2 + (String(v).length > 3 ? 4 : 6)" :class="valCls(v)">{{ v }}</text>
               </g>
             </template>
           </template>
@@ -222,7 +227,7 @@ function edgePath(a: number, b: number) {
           <!-- 格子 -->
           <g v-for="k in count" :key="'n' + k">
             <rect :x="x(k - 1)" :y="Y" :width="BOX" :height="BOX" rx="8" :class="['sp-box', { hl: f.hl?.includes(k - 1) }]" />
-            <text :x="x(k - 1) + BOX / 2" :y="Y + BOX / 2 + 6" class="sp-val">
+            <text :x="x(k - 1) + BOX / 2" :y="Y + BOX / 2 + (String(f.kind === 'list' ? f.vals[k - 1] : f.cells[k - 1]).length > 3 ? 4 : 6)" :class="valCls(f.kind === 'list' ? f.vals[k - 1] : f.cells[k - 1])">
               {{ f.kind === 'list' ? f.vals[k - 1] : f.cells[k - 1] }}
             </text>
             <text v-if="f.kind === 'array'" :x="x(k - 1) + BOX / 2" :y="Y - 10" class="sp-idx">{{ k - 1 }}</text>
@@ -275,6 +280,7 @@ function edgePath(a: number, b: number) {
 .sp-val { text-anchor: middle; font-size: 17px; font-weight: 600; fill: var(--vp-c-text-1); }
 .sp-idx { text-anchor: middle; font-size: 11px; fill: var(--vp-c-text-3); }
 .sp-val-sm { font-size: 12px; }
+.sp-val-xs { font-size: 10px; }
 .sp-box.tone-1 { fill: var(--vp-c-green-2); fill-opacity: 0.4; }
 .sp-box.tone-2 { fill: var(--vp-c-yellow-2); fill-opacity: 0.4; }
 .sp-box.tone-3 { fill: var(--vp-c-purple-2); fill-opacity: 0.4; }
