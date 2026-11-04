@@ -1,5 +1,7 @@
 # algo-notes：算法图解库
 
+网页版（带动画）：https://bingqin2.github.io/algo-notes/
+
 按数据结构和题型整理的面试核心题，每题所有解法 + 逐步可视化。网站用 VitePress 搭建，Markdown 在 GitHub 上也能直接读（动画需要在网站里看）。
 
 ## 本地运行
