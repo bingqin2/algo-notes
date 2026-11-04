@@ -1,0 +1,426 @@
+{
+ "title": "206 反转链表 · 迭代（三指针）",
+ "frames": [
+  {
+   "kind": "list",
+   "vals": [
+    1,
+    2,
+    3,
+    4,
+    5
+   ],
+   "next": [
+    1,
+    2,
+    3,
+    4,
+    null
+   ],
+   "ptr": {
+    "prev": 5,
+    "cur": 0
+   },
+   "hl": [],
+   "note": "初始：prev = ∅，cur = head。目标是把每条 next 掉头。"
+  },
+  {
+   "kind": "list",
+   "vals": [
+    1,
+    2,
+    3,
+    4,
+    5
+   ],
+   "next": [
+    1,
+    2,
+    3,
+    4,
+    null
+   ],
+   "ptr": {
+    "prev": 5,
+    "cur": 0,
+    "nxt": 1
+   },
+   "hl": [
+    0
+   ],
+   "note": "先用 nxt 记住 1 的下一个结点，否则掉头后就找不回来了。"
+  },
+  {
+   "kind": "list",
+   "vals": [
+    1,
+    2,
+    3,
+    4,
+    5
+   ],
+   "next": [
+    null,
+    2,
+    3,
+    4,
+    null
+   ],
+   "ptr": {
+    "prev": 5,
+    "cur": 0,
+    "nxt": 1
+   },
+   "hl": [
+    0
+   ],
+   "note": "cur.next = prev：1 的指针掉头，指向 ∅。"
+  },
+  {
+   "kind": "list",
+   "vals": [
+    1,
+    2,
+    3,
+    4,
+    5
+   ],
+   "next": [
+    null,
+    2,
+    3,
+    4,
+    null
+   ],
+   "ptr": {
+    "prev": 0,
+    "cur": 1
+   },
+   "hl": [],
+   "note": "prev、cur 各前进一步。"
+  },
+  {
+   "kind": "list",
+   "vals": [
+    1,
+    2,
+    3,
+    4,
+    5
+   ],
+   "next": [
+    null,
+    2,
+    3,
+    4,
+    null
+   ],
+   "ptr": {
+    "prev": 0,
+    "cur": 1,
+    "nxt": 2
+   },
+   "hl": [
+    1
+   ],
+   "note": "先用 nxt 记住 2 的下一个结点，否则掉头后就找不回来了。"
+  },
+  {
+   "kind": "list",
+   "vals": [
+    1,
+    2,
+    3,
+    4,
+    5
+   ],
+   "next": [
+    null,
+    0,
+    3,
+    4,
+    null
+   ],
+   "ptr": {
+    "prev": 0,
+    "cur": 1,
+    "nxt": 2
+   },
+   "hl": [
+    1
+   ],
+   "note": "cur.next = prev：2 的指针掉头，指向 1。"
+  },
+  {
+   "kind": "list",
+   "vals": [
+    1,
+    2,
+    3,
+    4,
+    5
+   ],
+   "next": [
+    null,
+    0,
+    3,
+    4,
+    null
+   ],
+   "ptr": {
+    "prev": 1,
+    "cur": 2
+   },
+   "hl": [],
+   "note": "prev、cur 各前进一步。"
+  },
+  {
+   "kind": "list",
+   "vals": [
+    1,
+    2,
+    3,
+    4,
+    5
+   ],
+   "next": [
+    null,
+    0,
+    3,
+    4,
+    null
+   ],
+   "ptr": {
+    "prev": 1,
+    "cur": 2,
+    "nxt": 3
+   },
+   "hl": [
+    2
+   ],
+   "note": "先用 nxt 记住 3 的下一个结点，否则掉头后就找不回来了。"
+  },
+  {
+   "kind": "list",
+   "vals": [
+    1,
+    2,
+    3,
+    4,
+    5
+   ],
+   "next": [
+    null,
+    0,
+    1,
+    4,
+    null
+   ],
+   "ptr": {
+    "prev": 1,
+    "cur": 2,
+    "nxt": 3
+   },
+   "hl": [
+    2
+   ],
+   "note": "cur.next = prev：3 的指针掉头，指向 2。"
+  },
+  {
+   "kind": "list",
+   "vals": [
+    1,
+    2,
+    3,
+    4,
+    5
+   ],
+   "next": [
+    null,
+    0,
+    1,
+    4,
+    null
+   ],
+   "ptr": {
+    "prev": 2,
+    "cur": 3
+   },
+   "hl": [],
+   "note": "prev、cur 各前进一步。"
+  },
+  {
+   "kind": "list",
+   "vals": [
+    1,
+    2,
+    3,
+    4,
+    5
+   ],
+   "next": [
+    null,
+    0,
+    1,
+    4,
+    null
+   ],
+   "ptr": {
+    "prev": 2,
+    "cur": 3,
+    "nxt": 4
+   },
+   "hl": [
+    3
+   ],
+   "note": "先用 nxt 记住 4 的下一个结点，否则掉头后就找不回来了。"
+  },
+  {
+   "kind": "list",
+   "vals": [
+    1,
+    2,
+    3,
+    4,
+    5
+   ],
+   "next": [
+    null,
+    0,
+    1,
+    2,
+    null
+   ],
+   "ptr": {
+    "prev": 2,
+    "cur": 3,
+    "nxt": 4
+   },
+   "hl": [
+    3
+   ],
+   "note": "cur.next = prev：4 的指针掉头，指向 3。"
+  },
+  {
+   "kind": "list",
+   "vals": [
+    1,
+    2,
+    3,
+    4,
+    5
+   ],
+   "next": [
+    null,
+    0,
+    1,
+    2,
+    null
+   ],
+   "ptr": {
+    "prev": 3,
+    "cur": 4
+   },
+   "hl": [],
+   "note": "prev、cur 各前进一步。"
+  },
+  {
+   "kind": "list",
+   "vals": [
+    1,
+    2,
+    3,
+    4,
+    5
+   ],
+   "next": [
+    null,
+    0,
+    1,
+    2,
+    null
+   ],
+   "ptr": {
+    "prev": 3,
+    "cur": 4,
+    "nxt": 5
+   },
+   "hl": [
+    4
+   ],
+   "note": "先用 nxt 记住 5 的下一个结点，否则掉头后就找不回来了。"
+  },
+  {
+   "kind": "list",
+   "vals": [
+    1,
+    2,
+    3,
+    4,
+    5
+   ],
+   "next": [
+    null,
+    0,
+    1,
+    2,
+    3
+   ],
+   "ptr": {
+    "prev": 3,
+    "cur": 4,
+    "nxt": 5
+   },
+   "hl": [
+    4
+   ],
+   "note": "cur.next = prev：5 的指针掉头，指向 4。"
+  },
+  {
+   "kind": "list",
+   "vals": [
+    1,
+    2,
+    3,
+    4,
+    5
+   ],
+   "next": [
+    null,
+    0,
+    1,
+    2,
+    3
+   ],
+   "ptr": {
+    "prev": 4,
+    "cur": 5
+   },
+   "hl": [],
+   "note": "prev、cur 各前进一步。"
+  },
+  {
+   "kind": "list",
+   "vals": [
+    1,
+    2,
+    3,
+    4,
+    5
+   ],
+   "next": [
+    null,
+    0,
+    1,
+    2,
+    3
+   ],
+   "ptr": {
+    "prev(新头)": 4,
+    "cur": 5
+   },
+   "hl": [],
+   "note": "cur 走到 ∅，循环结束，prev 就是新的头结点。"
+  }
+ ]
+}
