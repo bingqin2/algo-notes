@@ -1,0 +1,135 @@
+{
+ "title": "295 数据流的中位数 · 两个堆（左：较小一半的大顶堆，右：较大一半的小顶堆）",
+ "frames": [
+  {
+   "kind": "array",
+   "cells": [
+    "|"
+   ],
+   "ptr": {},
+   "hl": [],
+   "window": null,
+   "extra": "",
+   "note": "两个堆把数据分成两半：small 存较小的一半（大顶堆，堆顶是这一半的最大值），large 存较大的一半（小顶堆）。保持 small 的个数等于 large 或多一个。中位数只看两个堆顶。"
+  },
+  {
+   "kind": "array",
+   "cells": [
+    5,
+    "|"
+   ],
+   "ptr": {},
+   "hl": [
+    0
+   ],
+   "window": null,
+   "extra": "small 堆顶 5，large 堆顶 空",
+   "note": "加入 5：先放进 small，再把 small 的最大值 5 移到 large（保证左边都 ≤ 右边），large 比 small 多了，把 large 的最小值 5 移回 small。中位数 = 5。"
+  },
+  {
+   "kind": "array",
+   "cells": [
+    2,
+    "|",
+    5
+   ],
+   "ptr": {},
+   "hl": [
+    0,
+    2
+   ],
+   "window": null,
+   "extra": "small 堆顶 2，large 堆顶 5",
+   "note": "加入 2：先放进 small，再把 small 的最大值 5 移到 large（保证左边都 ≤ 右边）。中位数 = 3.5。"
+  },
+  {
+   "kind": "array",
+   "cells": [
+    2,
+    5,
+    "|",
+    8
+   ],
+   "ptr": {},
+   "hl": [
+    1
+   ],
+   "window": null,
+   "extra": "small 堆顶 5，large 堆顶 8",
+   "note": "加入 8：先放进 small，再把 small 的最大值 8 移到 large（保证左边都 ≤ 右边），large 比 small 多了，把 large 的最小值 5 移回 small。中位数 = 5。"
+  },
+  {
+   "kind": "array",
+   "cells": [
+    1,
+    2,
+    "|",
+    5,
+    8
+   ],
+   "ptr": {},
+   "hl": [
+    1,
+    3
+   ],
+   "window": null,
+   "extra": "small 堆顶 2，large 堆顶 5",
+   "note": "加入 1：先放进 small，再把 small 的最大值 5 移到 large（保证左边都 ≤ 右边）。中位数 = 3.5。"
+  },
+  {
+   "kind": "array",
+   "cells": [
+    1,
+    2,
+    5,
+    "|",
+    8,
+    9
+   ],
+   "ptr": {},
+   "hl": [
+    2
+   ],
+   "window": null,
+   "extra": "small 堆顶 5，large 堆顶 8",
+   "note": "加入 9：先放进 small，再把 small 的最大值 9 移到 large（保证左边都 ≤ 右边），large 比 small 多了，把 large 的最小值 5 移回 small。中位数 = 5。"
+  },
+  {
+   "kind": "array",
+   "cells": [
+    1,
+    2,
+    3,
+    "|",
+    5,
+    8,
+    9
+   ],
+   "ptr": {},
+   "hl": [
+    2,
+    4
+   ],
+   "window": null,
+   "extra": "small 堆顶 3，large 堆顶 5",
+   "note": "加入 3：先放进 small，再把 small 的最大值 5 移到 large（保证左边都 ≤ 右边）。中位数 = 4.0。"
+  },
+  {
+   "kind": "array",
+   "cells": [
+    1,
+    2,
+    3,
+    "|",
+    5,
+    8,
+    9
+   ],
+   "ptr": {},
+   "hl": [],
+   "window": null,
+   "extra": "",
+   "note": "addNum 是 O(log n)，findMedian 是 O(1)。格子里为了好看排了序，堆里实际不是有序的，只保证堆顶。"
+  }
+ ]
+}
