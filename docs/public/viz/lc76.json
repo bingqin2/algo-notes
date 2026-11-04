@@ -1,0 +1,674 @@
+{
+ "title": "76 最小覆盖子串 · need / window + valid",
+ "frames": [
+  {
+   "kind": "array",
+   "cells": [
+    "A",
+    "D",
+    "O",
+    "B",
+    "E",
+    "C",
+    "O",
+    "D",
+    "E",
+    "B",
+    "A",
+    "N",
+    "C"
+   ],
+   "ptr": {},
+   "hl": [],
+   "window": null,
+   "extra": "need = {A:1, B:1, C:1}，valid = 0",
+   "note": "right 一直扩张；valid 记录有几种字符的数量已经够了。valid 等于需要的种类数时，窗口已经覆盖 t，开始收缩 left 找更短的。"
+  },
+  {
+   "kind": "array",
+   "cells": [
+    "A",
+    "D",
+    "O",
+    "B",
+    "E",
+    "C",
+    "O",
+    "D",
+    "E",
+    "B",
+    "A",
+    "N",
+    "C"
+   ],
+   "ptr": {
+    "L": 0,
+    "R": 0
+   },
+   "hl": [
+    0
+   ],
+   "window": [
+    0,
+    0
+   ],
+   "extra": "valid = 1，最短 = 无",
+   "note": "加入 'A'，valid = 1，还没覆盖。"
+  },
+  {
+   "kind": "array",
+   "cells": [
+    "A",
+    "D",
+    "O",
+    "B",
+    "E",
+    "C",
+    "O",
+    "D",
+    "E",
+    "B",
+    "A",
+    "N",
+    "C"
+   ],
+   "ptr": {
+    "L": 0,
+    "R": 1
+   },
+   "hl": [
+    1
+   ],
+   "window": [
+    0,
+    1
+   ],
+   "extra": "valid = 1，最短 = 无",
+   "note": "加入 'D'，valid = 1，还没覆盖。"
+  },
+  {
+   "kind": "array",
+   "cells": [
+    "A",
+    "D",
+    "O",
+    "B",
+    "E",
+    "C",
+    "O",
+    "D",
+    "E",
+    "B",
+    "A",
+    "N",
+    "C"
+   ],
+   "ptr": {
+    "L": 0,
+    "R": 2
+   },
+   "hl": [
+    2
+   ],
+   "window": [
+    0,
+    2
+   ],
+   "extra": "valid = 1，最短 = 无",
+   "note": "加入 'O'，valid = 1，还没覆盖。"
+  },
+  {
+   "kind": "array",
+   "cells": [
+    "A",
+    "D",
+    "O",
+    "B",
+    "E",
+    "C",
+    "O",
+    "D",
+    "E",
+    "B",
+    "A",
+    "N",
+    "C"
+   ],
+   "ptr": {
+    "L": 0,
+    "R": 3
+   },
+   "hl": [
+    3
+   ],
+   "window": [
+    0,
+    3
+   ],
+   "extra": "valid = 2，最短 = 无",
+   "note": "加入 'B'，valid = 2，还没覆盖。"
+  },
+  {
+   "kind": "array",
+   "cells": [
+    "A",
+    "D",
+    "O",
+    "B",
+    "E",
+    "C",
+    "O",
+    "D",
+    "E",
+    "B",
+    "A",
+    "N",
+    "C"
+   ],
+   "ptr": {
+    "L": 0,
+    "R": 4
+   },
+   "hl": [
+    4
+   ],
+   "window": [
+    0,
+    4
+   ],
+   "extra": "valid = 2，最短 = 无",
+   "note": "加入 'E'，valid = 2，还没覆盖。"
+  },
+  {
+   "kind": "array",
+   "cells": [
+    "A",
+    "D",
+    "O",
+    "B",
+    "E",
+    "C",
+    "O",
+    "D",
+    "E",
+    "B",
+    "A",
+    "N",
+    "C"
+   ],
+   "ptr": {
+    "L": 0,
+    "R": 5
+   },
+   "hl": [
+    0
+   ],
+   "window": [
+    0,
+    5
+   ],
+   "extra": "valid = 3，最短 = ADOBEC",
+   "note": "覆盖了 t，窗口 \"ADOBEC\" 长 6，更新最短。尝试移出 'A'。"
+  },
+  {
+   "kind": "array",
+   "cells": [
+    "A",
+    "D",
+    "O",
+    "B",
+    "E",
+    "C",
+    "O",
+    "D",
+    "E",
+    "B",
+    "A",
+    "N",
+    "C"
+   ],
+   "ptr": {
+    "L": 1,
+    "R": 6
+   },
+   "hl": [
+    6
+   ],
+   "window": [
+    1,
+    6
+   ],
+   "extra": "valid = 2，最短 = ADOBEC",
+   "note": "加入 'O'，valid = 2，还没覆盖。"
+  },
+  {
+   "kind": "array",
+   "cells": [
+    "A",
+    "D",
+    "O",
+    "B",
+    "E",
+    "C",
+    "O",
+    "D",
+    "E",
+    "B",
+    "A",
+    "N",
+    "C"
+   ],
+   "ptr": {
+    "L": 1,
+    "R": 7
+   },
+   "hl": [
+    7
+   ],
+   "window": [
+    1,
+    7
+   ],
+   "extra": "valid = 2，最短 = ADOBEC",
+   "note": "加入 'D'，valid = 2，还没覆盖。"
+  },
+  {
+   "kind": "array",
+   "cells": [
+    "A",
+    "D",
+    "O",
+    "B",
+    "E",
+    "C",
+    "O",
+    "D",
+    "E",
+    "B",
+    "A",
+    "N",
+    "C"
+   ],
+   "ptr": {
+    "L": 1,
+    "R": 8
+   },
+   "hl": [
+    8
+   ],
+   "window": [
+    1,
+    8
+   ],
+   "extra": "valid = 2，最短 = ADOBEC",
+   "note": "加入 'E'，valid = 2，还没覆盖。"
+  },
+  {
+   "kind": "array",
+   "cells": [
+    "A",
+    "D",
+    "O",
+    "B",
+    "E",
+    "C",
+    "O",
+    "D",
+    "E",
+    "B",
+    "A",
+    "N",
+    "C"
+   ],
+   "ptr": {
+    "L": 1,
+    "R": 9
+   },
+   "hl": [
+    9
+   ],
+   "window": [
+    1,
+    9
+   ],
+   "extra": "valid = 2，最短 = ADOBEC",
+   "note": "加入 'B'，valid = 2，还没覆盖。"
+  },
+  {
+   "kind": "array",
+   "cells": [
+    "A",
+    "D",
+    "O",
+    "B",
+    "E",
+    "C",
+    "O",
+    "D",
+    "E",
+    "B",
+    "A",
+    "N",
+    "C"
+   ],
+   "ptr": {
+    "L": 1,
+    "R": 10
+   },
+   "hl": [
+    1
+   ],
+   "window": [
+    1,
+    10
+   ],
+   "extra": "valid = 3，最短 = ADOBEC",
+   "note": "覆盖了 t，窗口 \"DOBECODEBA\" 长 10，更新最短。尝试移出 'D'。"
+  },
+  {
+   "kind": "array",
+   "cells": [
+    "A",
+    "D",
+    "O",
+    "B",
+    "E",
+    "C",
+    "O",
+    "D",
+    "E",
+    "B",
+    "A",
+    "N",
+    "C"
+   ],
+   "ptr": {
+    "L": 2,
+    "R": 10
+   },
+   "hl": [
+    2
+   ],
+   "window": [
+    2,
+    10
+   ],
+   "extra": "valid = 3，最短 = ADOBEC",
+   "note": "覆盖了 t，窗口 \"OBECODEBA\" 长 9，更新最短。尝试移出 'O'。"
+  },
+  {
+   "kind": "array",
+   "cells": [
+    "A",
+    "D",
+    "O",
+    "B",
+    "E",
+    "C",
+    "O",
+    "D",
+    "E",
+    "B",
+    "A",
+    "N",
+    "C"
+   ],
+   "ptr": {
+    "L": 3,
+    "R": 10
+   },
+   "hl": [
+    3
+   ],
+   "window": [
+    3,
+    10
+   ],
+   "extra": "valid = 3，最短 = ADOBEC",
+   "note": "覆盖了 t，窗口 \"BECODEBA\" 长 8，更新最短。尝试移出 'B'。"
+  },
+  {
+   "kind": "array",
+   "cells": [
+    "A",
+    "D",
+    "O",
+    "B",
+    "E",
+    "C",
+    "O",
+    "D",
+    "E",
+    "B",
+    "A",
+    "N",
+    "C"
+   ],
+   "ptr": {
+    "L": 4,
+    "R": 10
+   },
+   "hl": [
+    4
+   ],
+   "window": [
+    4,
+    10
+   ],
+   "extra": "valid = 3，最短 = ADOBEC",
+   "note": "覆盖了 t，窗口 \"ECODEBA\" 长 7，更新最短。尝试移出 'E'。"
+  },
+  {
+   "kind": "array",
+   "cells": [
+    "A",
+    "D",
+    "O",
+    "B",
+    "E",
+    "C",
+    "O",
+    "D",
+    "E",
+    "B",
+    "A",
+    "N",
+    "C"
+   ],
+   "ptr": {
+    "L": 5,
+    "R": 10
+   },
+   "hl": [
+    5
+   ],
+   "window": [
+    5,
+    10
+   ],
+   "extra": "valid = 3，最短 = ADOBEC",
+   "note": "覆盖了 t，窗口 \"CODEBA\" 长 6，更新最短。尝试移出 'C'。"
+  },
+  {
+   "kind": "array",
+   "cells": [
+    "A",
+    "D",
+    "O",
+    "B",
+    "E",
+    "C",
+    "O",
+    "D",
+    "E",
+    "B",
+    "A",
+    "N",
+    "C"
+   ],
+   "ptr": {
+    "L": 6,
+    "R": 11
+   },
+   "hl": [
+    11
+   ],
+   "window": [
+    6,
+    11
+   ],
+   "extra": "valid = 2，最短 = ADOBEC",
+   "note": "加入 'N'，valid = 2，还没覆盖。"
+  },
+  {
+   "kind": "array",
+   "cells": [
+    "A",
+    "D",
+    "O",
+    "B",
+    "E",
+    "C",
+    "O",
+    "D",
+    "E",
+    "B",
+    "A",
+    "N",
+    "C"
+   ],
+   "ptr": {
+    "L": 6,
+    "R": 12
+   },
+   "hl": [
+    6
+   ],
+   "window": [
+    6,
+    12
+   ],
+   "extra": "valid = 3，最短 = ADOBEC",
+   "note": "覆盖了 t，窗口 \"ODEBANC\" 长 7，更新最短。尝试移出 'O'。"
+  },
+  {
+   "kind": "array",
+   "cells": [
+    "A",
+    "D",
+    "O",
+    "B",
+    "E",
+    "C",
+    "O",
+    "D",
+    "E",
+    "B",
+    "A",
+    "N",
+    "C"
+   ],
+   "ptr": {
+    "L": 7,
+    "R": 12
+   },
+   "hl": [
+    7
+   ],
+   "window": [
+    7,
+    12
+   ],
+   "extra": "valid = 3，最短 = ADOBEC",
+   "note": "覆盖了 t，窗口 \"DEBANC\" 长 6，更新最短。尝试移出 'D'。"
+  },
+  {
+   "kind": "array",
+   "cells": [
+    "A",
+    "D",
+    "O",
+    "B",
+    "E",
+    "C",
+    "O",
+    "D",
+    "E",
+    "B",
+    "A",
+    "N",
+    "C"
+   ],
+   "ptr": {
+    "L": 8,
+    "R": 12
+   },
+   "hl": [
+    8
+   ],
+   "window": [
+    8,
+    12
+   ],
+   "extra": "valid = 3，最短 = EBANC",
+   "note": "覆盖了 t，窗口 \"EBANC\" 长 5，更新最短。尝试移出 'E'。"
+  },
+  {
+   "kind": "array",
+   "cells": [
+    "A",
+    "D",
+    "O",
+    "B",
+    "E",
+    "C",
+    "O",
+    "D",
+    "E",
+    "B",
+    "A",
+    "N",
+    "C"
+   ],
+   "ptr": {
+    "L": 9,
+    "R": 12
+   },
+   "hl": [
+    9
+   ],
+   "window": [
+    9,
+    12
+   ],
+   "extra": "valid = 3，最短 = BANC",
+   "note": "覆盖了 t，窗口 \"BANC\" 长 4，更新最短。尝试移出 'B'。"
+  },
+  {
+   "kind": "array",
+   "cells": [
+    "A",
+    "D",
+    "O",
+    "B",
+    "E",
+    "C",
+    "O",
+    "D",
+    "E",
+    "B",
+    "A",
+    "N",
+    "C"
+   ],
+   "ptr": {},
+   "hl": [],
+   "window": [
+    9,
+    12
+   ],
+   "extra": "最短 = BANC",
+   "note": "答案 \"BANC\"。每个字符最多进出窗口一次，O(|s| + |t|)。"
+  }
+ ]
+}

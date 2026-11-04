@@ -1,0 +1,349 @@
+{
+ "title": "42 接雨水 · 双指针",
+ "frames": [
+  {
+   "kind": "array",
+   "cells": [
+    0,
+    1,
+    0,
+    2,
+    1,
+    0,
+    1,
+    3,
+    2,
+    1,
+    2,
+    1
+   ],
+   "ptr": {
+    "l": 0,
+    "r": 11
+   },
+   "hl": [],
+   "window": null,
+   "extra": "lmax = 0，rmax = 0，水 = 0",
+   "note": "每个位置的水位 = min(左边最高, 右边最高)。双指针：哪边的最高值更小，哪边的水位就已经确定了。"
+  },
+  {
+   "kind": "array",
+   "cells": [
+    0,
+    1,
+    0,
+    2,
+    1,
+    0,
+    1,
+    3,
+    2,
+    1,
+    2,
+    1
+   ],
+   "ptr": {
+    "l": 0,
+    "r": 11
+   },
+   "hl": [
+    0
+   ],
+   "window": null,
+   "extra": "lmax = 0，rmax = 1，水 = 0",
+   "note": "lmax = 0 < rmax = 1：右边一定有比 lmax 高的墙，l 处水位就是 lmax，存水 0 − 0 = 0。l 右移。"
+  },
+  {
+   "kind": "array",
+   "cells": [
+    0,
+    1,
+    0,
+    2,
+    1,
+    0,
+    1,
+    3,
+    2,
+    1,
+    2,
+    1
+   ],
+   "ptr": {
+    "l": 1,
+    "r": 11
+   },
+   "hl": [
+    11
+   ],
+   "window": null,
+   "extra": "lmax = 1，rmax = 1，水 = 0",
+   "note": "lmax = 1 ≥ rmax = 1：r 处水位就是 rmax，存水 1 − 1 = 0。r 左移。"
+  },
+  {
+   "kind": "array",
+   "cells": [
+    0,
+    1,
+    0,
+    2,
+    1,
+    0,
+    1,
+    3,
+    2,
+    1,
+    2,
+    1
+   ],
+   "ptr": {
+    "l": 1,
+    "r": 10
+   },
+   "hl": [
+    1
+   ],
+   "window": null,
+   "extra": "lmax = 1，rmax = 2，水 = 0",
+   "note": "lmax = 1 < rmax = 2：右边一定有比 lmax 高的墙，l 处水位就是 lmax，存水 1 − 1 = 0。l 右移。"
+  },
+  {
+   "kind": "array",
+   "cells": [
+    0,
+    1,
+    0,
+    2,
+    1,
+    0,
+    1,
+    3,
+    2,
+    1,
+    2,
+    1
+   ],
+   "ptr": {
+    "l": 2,
+    "r": 10
+   },
+   "hl": [
+    2
+   ],
+   "window": null,
+   "extra": "lmax = 1，rmax = 2，水 = 1",
+   "note": "lmax = 1 < rmax = 2：右边一定有比 lmax 高的墙，l 处水位就是 lmax，存水 1 − 0 = 1。l 右移。"
+  },
+  {
+   "kind": "array",
+   "cells": [
+    0,
+    1,
+    0,
+    2,
+    1,
+    0,
+    1,
+    3,
+    2,
+    1,
+    2,
+    1
+   ],
+   "ptr": {
+    "l": 3,
+    "r": 10
+   },
+   "hl": [
+    10
+   ],
+   "window": null,
+   "extra": "lmax = 2，rmax = 2，水 = 1",
+   "note": "lmax = 2 ≥ rmax = 2：r 处水位就是 rmax，存水 2 − 2 = 0。r 左移。"
+  },
+  {
+   "kind": "array",
+   "cells": [
+    0,
+    1,
+    0,
+    2,
+    1,
+    0,
+    1,
+    3,
+    2,
+    1,
+    2,
+    1
+   ],
+   "ptr": {
+    "l": 3,
+    "r": 9
+   },
+   "hl": [
+    9
+   ],
+   "window": null,
+   "extra": "lmax = 2，rmax = 2，水 = 2",
+   "note": "lmax = 2 ≥ rmax = 2：r 处水位就是 rmax，存水 2 − 1 = 1。r 左移。"
+  },
+  {
+   "kind": "array",
+   "cells": [
+    0,
+    1,
+    0,
+    2,
+    1,
+    0,
+    1,
+    3,
+    2,
+    1,
+    2,
+    1
+   ],
+   "ptr": {
+    "l": 3,
+    "r": 8
+   },
+   "hl": [
+    8
+   ],
+   "window": null,
+   "extra": "lmax = 2，rmax = 2，水 = 2",
+   "note": "lmax = 2 ≥ rmax = 2：r 处水位就是 rmax，存水 2 − 2 = 0。r 左移。"
+  },
+  {
+   "kind": "array",
+   "cells": [
+    0,
+    1,
+    0,
+    2,
+    1,
+    0,
+    1,
+    3,
+    2,
+    1,
+    2,
+    1
+   ],
+   "ptr": {
+    "l": 3,
+    "r": 7
+   },
+   "hl": [
+    3
+   ],
+   "window": null,
+   "extra": "lmax = 2，rmax = 3，水 = 2",
+   "note": "lmax = 2 < rmax = 3：右边一定有比 lmax 高的墙，l 处水位就是 lmax，存水 2 − 2 = 0。l 右移。"
+  },
+  {
+   "kind": "array",
+   "cells": [
+    0,
+    1,
+    0,
+    2,
+    1,
+    0,
+    1,
+    3,
+    2,
+    1,
+    2,
+    1
+   ],
+   "ptr": {
+    "l": 4,
+    "r": 7
+   },
+   "hl": [
+    4
+   ],
+   "window": null,
+   "extra": "lmax = 2，rmax = 3，水 = 3",
+   "note": "lmax = 2 < rmax = 3：右边一定有比 lmax 高的墙，l 处水位就是 lmax，存水 2 − 1 = 1。l 右移。"
+  },
+  {
+   "kind": "array",
+   "cells": [
+    0,
+    1,
+    0,
+    2,
+    1,
+    0,
+    1,
+    3,
+    2,
+    1,
+    2,
+    1
+   ],
+   "ptr": {
+    "l": 5,
+    "r": 7
+   },
+   "hl": [
+    5
+   ],
+   "window": null,
+   "extra": "lmax = 2，rmax = 3，水 = 5",
+   "note": "lmax = 2 < rmax = 3：右边一定有比 lmax 高的墙，l 处水位就是 lmax，存水 2 − 0 = 2。l 右移。"
+  },
+  {
+   "kind": "array",
+   "cells": [
+    0,
+    1,
+    0,
+    2,
+    1,
+    0,
+    1,
+    3,
+    2,
+    1,
+    2,
+    1
+   ],
+   "ptr": {
+    "l": 6,
+    "r": 7
+   },
+   "hl": [
+    6
+   ],
+   "window": null,
+   "extra": "lmax = 2，rmax = 3，水 = 6",
+   "note": "lmax = 2 < rmax = 3：右边一定有比 lmax 高的墙，l 处水位就是 lmax，存水 2 − 1 = 1。l 右移。"
+  },
+  {
+   "kind": "array",
+   "cells": [
+    0,
+    1,
+    0,
+    2,
+    1,
+    0,
+    1,
+    3,
+    2,
+    1,
+    2,
+    1
+   ],
+   "ptr": {},
+   "hl": [],
+   "window": null,
+   "extra": "水 = 6",
+   "note": "两指针相遇，一共 6。O(n) 时间，O(1) 空间。"
+  }
+ ]
+}
