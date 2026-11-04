@@ -1,12 +1,18 @@
 ---
 title: "3. 无重复字符的最长子串"
-status: done
+lc: 3
+slug: longest-substring-without-repeating-characters
+difficulty: 中等
+tier: A
+source: "Hot 100"
 asked: "字节 ×3 · 小米"
+status: done
 ---
-
 # 3. 无重复字符的最长子串
 
-> [力扣 3](https://leetcode.cn/problemset/?search=3) · 近两年面经里出现在：**字节 ×3 · 小米**
+> [力扣 3](https://leetcode.cn/problems/longest-substring-without-repeating-characters/) · 近两年面经里出现在：**字节 ×3 · 小米**
+>
+> A 层：所有常见解法都要会，闭卷写出，能讲清追问
 
 ## 识别信号
 

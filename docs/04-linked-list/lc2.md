@@ -1,0 +1,32 @@
+---
+title: "2. 两数相加"
+lc: 2
+slug: add-two-numbers
+difficulty: 中等
+tier: B
+source: "Hot 100"
+status: todo
+---
+# 2. 两数相加
+
+> [力扣 2](https://leetcode.cn/problems/add-two-numbers/) · 中等 · 来源：Hot 100
+>
+> B 层：掌握最优解法，20 分钟内写出
+
+## 识别信号
+
+TODO
+
+## 最优解法
+
+**思路**：TODO
+
+```python
+# TODO
+```
+
+**复杂度**：时间 O(?)，空间 O(?)
+
+## 易错点
+
+- TODO

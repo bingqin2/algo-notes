@@ -1,12 +1,18 @@
 ---
 title: "1. 两数之和"
-status: todo
+lc: 1
+slug: two-sum
+difficulty: 简单
+tier: C
+source: "Hot 100"
 asked: "高频经典"
+status: todo
 ---
-
 # 1. 两数之和
 
-> [力扣 1](https://leetcode.cn/problemset/?search=1) · 近两年面经里出现在：**高频经典**
+> [力扣 1](https://leetcode.cn/problems/two-sum/) · 近两年面经里出现在：**高频经典**
+>
+> C 层：认得题型，说得出方法和关键点
 
 ## 识别信号
 

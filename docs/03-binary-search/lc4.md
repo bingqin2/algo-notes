@@ -1,12 +1,18 @@
 ---
 title: "4. 寻找两个正序数组的中位数"
-status: todo
+lc: 4
+slug: median-of-two-sorted-arrays
+difficulty: 困难
+tier: B
+source: "Hot 100"
 asked: "高频经典"
+status: todo
 ---
-
 # 4. 寻找两个正序数组的中位数
 
-> [力扣 4](https://leetcode.cn/problemset/?search=4) · 近两年面经里出现在：**高频经典**
+> [力扣 4](https://leetcode.cn/problems/median-of-two-sorted-arrays/) · 近两年面经里出现在：**高频经典**
+>
+> B 层：掌握最优解法，20 分钟内写出
 
 ## 识别信号
 

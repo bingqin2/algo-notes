@@ -1,12 +1,18 @@
 ---
-title: "6. Z 字形变换 / 矩阵 Z 字形遍历"
-status: todo
+title: "6. Z 字形变换"
+lc: 6
+slug: zigzag-conversion
+difficulty: 中等
+tier: A
+source: "面试经典 150 · 面经"
 asked: "腾讯 ×2"
+status: todo
 ---
+# 6. Z 字形变换
 
-# 6. Z 字形变换 / 矩阵 Z 字形遍历
-
-> [力扣 6](https://leetcode.cn/problemset/?search=6) · 近两年面经里出现在：**腾讯 ×2**
+> [力扣 6](https://leetcode.cn/problems/zigzag-conversion/) · 近两年面经里出现在：**腾讯 ×2**
+>
+> A 层：所有常见解法都要会，闭卷写出，能讲清追问
 
 ## 识别信号
 

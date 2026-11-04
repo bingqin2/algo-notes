@@ -1,12 +1,16 @@
 ---
-title: "singleflight（相同请求合并）"
-status: todo
+title: "singleflight（合并相同请求）"
+difficulty: 手写
+tier: A
+source: "手写"
 asked: "字节"
+status: todo
 ---
-
 # singleflight（相同请求合并）
 
 > 非力扣原题，面试手写题 · 近两年面经里出现在：**字节**
+>
+> A 层：所有常见解法都要会，闭卷写出，能讲清追问
 
 ## 识别信号
 

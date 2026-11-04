@@ -14,7 +14,10 @@ export default withMermaid(
     lastUpdated: true,
     cleanUrls: true,
     themeConfig: {
-      nav: [{ text: '首页', link: '/' }],
+      nav: [
+        { text: '首页', link: '/' },
+        { text: '核心 300 题', link: '/core300' },
+      ],
       sidebar: buildSidebar(docsDir),
       outline: { level: [2, 3], label: '本页目录' },
       search: { provider: 'local' },

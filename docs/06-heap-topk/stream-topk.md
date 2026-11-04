@@ -1,12 +1,16 @@
 ---
-title: "流式 / 海量数据 Top K（日志中出现最多的 IP）"
-status: todo
+title: "流式 / 海量数据 Top K"
+difficulty: 手写
+tier: A
+source: "手写"
 asked: "字节 ×2 · 华为"
+status: todo
 ---
-
 # 流式 / 海量数据 Top K（日志中出现最多的 IP）
 
 > 非力扣原题，面试手写题 · 近两年面经里出现在：**字节 ×2 · 华为**
+>
+> A 层：所有常见解法都要会，闭卷写出，能讲清追问
 
 ## 识别信号
 

@@ -1,12 +1,18 @@
 ---
 title: "5. 最长回文子串"
-status: todo
+lc: 5
+slug: longest-palindromic-substring
+difficulty: 中等
+tier: A
+source: "Hot 100"
 asked: "字节 ×2"
+status: todo
 ---
-
 # 5. 最长回文子串
 
-> [力扣 5](https://leetcode.cn/problemset/?search=5) · 近两年面经里出现在：**字节 ×2**
+> [力扣 5](https://leetcode.cn/problems/longest-palindromic-substring/) · 近两年面经里出现在：**字节 ×2**
+>
+> A 层：所有常见解法都要会，闭卷写出，能讲清追问
 
 ## 识别信号
 

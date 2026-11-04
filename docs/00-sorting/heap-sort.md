@@ -1,12 +1,16 @@
 ---
 title: "手写堆排序"
-status: todo
+difficulty: 手写
+tier: A
+source: "手写"
 asked: "腾讯"
+status: todo
 ---
-
 # 手写堆排序
 
 > 非力扣原题，面试手写题 · 近两年面经里出现在：**腾讯**
+>
+> A 层：所有常见解法都要会，闭卷写出，能讲清追问
 
 ## 识别信号
 

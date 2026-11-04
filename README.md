@@ -2,7 +2,7 @@
 
 网页版（带动画）：https://bingqin2.github.io/algo-notes/
 
-按数据结构和题型整理的面试核心题，每题所有解法 + 逐步可视化。网站用 VitePress 搭建，Markdown 在 GitHub 上也能直接读（动画需要在网站里看）。
+按数据结构和题型整理的核心 300 题（含完整 Hot 100），分 A / B / C 三层，A 层每题所有解法 + 逐步可视化。网站用 VitePress 搭建，Markdown 在 GitHub 上也能直接读（动画需要在网站里看）。
 
 ## 本地运行
 
@@ -16,6 +16,14 @@ npm run dev
 1. 在 `tools/traces/` 新建脚本，参考 `lc206.py`：在解法的关键步骤调用 `t.list(...)`（链表）或 `t.array(...)`（数组/字符串）。
 2. 运行 `python3 tools/traces/你的脚本.py`，生成 `docs/public/viz/名字.json`。
 3. 在题目页里写 `<StepPlayer src="/viz/名字.json" />`。
+
+## 更新进度
+
+题目页 frontmatter 里的 `status` 改成 `done` 后运行：
+
+```bash
+python3 tools/gen_index.py
+```
 
 ## 目录
 
